@@ -73,6 +73,3 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
-.vs/Autoservisas/config/applicationhost.config
-App_Data/Database.mdf
-App_Data/Database_log.ldf
