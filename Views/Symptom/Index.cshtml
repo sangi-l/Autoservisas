@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Autoservisas.Models.Symptom>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @if (item.Price != 0)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.SymptomID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.SymptomID }, new { onclick = "return confirm('Are you sure you want to delete this item?');" })
+        </td>
+    }
+</tr>
+}
+
+</table>
