@@ -39,9 +39,9 @@ namespace Autoservisas.Models
             SqlCommand cmd = new SqlCommand("AddNewSymptom", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@details", model.Details);
-            cmd.Parameters.AddWithValue("@price", model.Price);
-            cmd.Parameters.AddWithValue("@duration", model.Duration);
+            cmd.Parameters.AddWithValue("@aprasymas", model.Details);
+            cmd.Parameters.AddWithValue("@kaina", model.Price);
+            cmd.Parameters.AddWithValue("@trukme", model.Duration);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -72,10 +72,10 @@ namespace Autoservisas.Models
                 symptomlist.Add(
                     new Symptom
                     {
-                        SymptomID = Convert.ToInt32(dr["Id"]),
-                        Details = Convert.ToString(dr["details"]),
-                        Price = Convert.ToDouble(dr["price"]),
-                        Duration = Convert.ToDouble(dr["duration"])
+                        SymptomID = Convert.ToInt32(dr["id_simptomas"]),
+                        Details = Convert.ToString(dr["aprasymas"]),
+                        Price = Convert.ToDouble(dr["kaina"]),
+                        Duration = Convert.ToDouble(dr["trukme"])
                     });
             }
             return symptomlist;
@@ -87,10 +87,10 @@ namespace Autoservisas.Models
             SqlCommand cmd = new SqlCommand("UpdateSymptomDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@SymptomId", model.SymptomID);
-            cmd.Parameters.AddWithValue("@details", model.Details);
-            cmd.Parameters.AddWithValue("@price", model.Price);
-            cmd.Parameters.AddWithValue("@duration", model.Duration);
+            cmd.Parameters.AddWithValue("@id_simptomas", model.SymptomID);
+            cmd.Parameters.AddWithValue("@aprasymas", model.Details);
+            cmd.Parameters.AddWithValue("@kaina", model.Price);
+            cmd.Parameters.AddWithValue("@trukme", model.Duration);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -108,7 +108,7 @@ namespace Autoservisas.Models
             SqlCommand cmd = new SqlCommand("DeleteSymptom", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@SymptomId", id);
+            cmd.Parameters.AddWithValue("@id_simptomas", id);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
