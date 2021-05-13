@@ -10,20 +10,9 @@ namespace Autoservisas.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            var role = Auth.GetRole();
+            if (role != (int)Auth.Roles.User && role != (int)Auth.Roles.Mechanic && role != (int)Auth.Roles.Administrator)
+                Auth.SetRole((int)Auth.Roles.NotLoggedIn);
             return View();
         }
     }
