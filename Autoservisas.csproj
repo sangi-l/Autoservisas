@@ -120,11 +120,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\SymptomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Part.cs" />
     <Compile Include="Models\Mechanic.cs" />
     <Compile Include="Models\Registered_User.cs" />
     <Compile Include="Models\Symptom.cs" />
@@ -173,6 +175,8 @@
     <Content Include="Views\Symptom\Edit.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Part\Index.cshtml" />
+    <Content Include="Views\Part\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
