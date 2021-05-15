@@ -80,7 +80,7 @@ namespace Autoservisas.Models
                 partlist.Add(
                     new Part
                     {
-                        PartID = Convert.ToInt32(dr["id_simptomas"]),
+                        PartID = Convert.ToInt32(dr["id_detale"]),
                         Price = Convert.ToDouble(dr["kaina"]),
                         Name = Convert.ToString(dr["pavadinimas"]),
                         Code = Convert.ToInt32(dr["detales_kodas"]),
