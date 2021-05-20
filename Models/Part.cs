@@ -90,7 +90,7 @@ namespace Autoservisas.Models
                         Ammount = Convert.ToInt32(dr["likutis"]),
                         Quality = Convert.ToInt32(dr["kokybe"]),
                         Category = Convert.ToString(dr["kategorija"]),
-                        Originallity = Convert.ToBoolean(dr["originalumas"])
+                        Originallity = Convert.ToBoolean(dr["orginalumas"])
                     });
             }
             return partlist;
