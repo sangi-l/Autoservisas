@@ -70,11 +70,10 @@ namespace Autoservisas.Models
                         DateTo = Convert.ToDateTime(dr["data_iki"]),
                         TimeFrom = Convert.ToInt32(dr["laikas_nuo"]),
                         TimeTo = Convert.ToInt32(dr["laikas_iki"]),
-                        MechanicID = Convert.ToInt32(dr["fk_meistrasid"])
+                        MechanicID = mid
                     });
                 } 
             }
-
 
             return workhours;
         }
