@@ -184,10 +184,9 @@
     <Content Include="Views\Part\ManualChooseParts.cshtml" />
     <Content Include="Views\WorkHours\Index.cshtml" />
     <Content Include="Views\WorkHours\AddTime.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Cart\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
