@@ -22,5 +22,27 @@ namespace Autoservisas.Controllers
         {
             return View();
         }
+
+        // POST: AddTime
+        [HttpPost]
+        public ActionResult AddNewTime(WorkHours time)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    WorkHours db = new WorkHours();
+                    if (db.AddTime(time))
+                    {
+                        return RedirectToAction("Index", "WorkHours");
+                    }
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
