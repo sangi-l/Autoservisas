@@ -36,7 +36,7 @@
                     }
                     @if (Auth.GetRole() == (int)Auth.Roles.Administrator)
                     {
-
+                        <li>@Html.ActionLink("Detalės", "Index", "Part")</li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

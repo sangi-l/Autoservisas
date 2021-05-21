@@ -1,7 +1,21 @@
-﻿@using Autoservisas.Controllers
+﻿﻿@model bool
+@using Autoservisas.Controllers
 
 @{
     ViewBag.Title = "Pagrindinis puslapis";
 }
 
 <h1>Pagrindinis autoserviso puslapis</h1>
+@if (Auth.GetRole() == (int)Auth.Roles.Administrator)
+{
+    if (Model)
+    {
+    <script>
+    var answer = confirm("Trūksta detalių, ar norite būti perkelti į detalių sąrašą?")
+
+    if (answer) { window.location = "/Part/Index"; }
+
+    </script>
+    }
+ }
+

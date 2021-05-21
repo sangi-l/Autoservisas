@@ -115,6 +115,31 @@ namespace Autoservisas.Models
             else
                 return false;
         }
+        public bool CheckIfDepleted()
+        {
+            List<int> Ammounts = new List<int>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetPartDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                int ammount = Convert.ToInt32(dr["likutis"]);
+                if (ammount < 5)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public List<String> GetCategories()
         {
