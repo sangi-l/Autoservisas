@@ -4,7 +4,7 @@
 <table class="table">
     <tr>
         <th>
-            Kategorija
+            Pasirinkite detalių kategorija:
         </th>
         <th></th>
     </tr>
@@ -14,9 +14,6 @@
         <tr>
             <td>
                 @Html.ActionLink(item, "ManualChooseParts", new { category = item })
-            </td>
-            <td>
-                @Html.ActionLink("Papildyti", "Edit")
             </td>
         </tr>
     }
