@@ -183,6 +183,7 @@
     <Content Include="Views\Part\ManualChooseIndex.cshtml" />
     <Content Include="Views\Part\ManualChooseParts.cshtml" />
     <Content Include="Views\WorkHours\Index.cshtml" />
+    <Content Include="Views\WorkHours\AddTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />

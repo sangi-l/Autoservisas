@@ -17,10 +17,12 @@ namespace Autoservisas.Models
         public int TimeID { get; set; }
         [DisplayName("Data (nuo)")]
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateFrom { get; set; }
 
         [DisplayName("Data (iki)")]
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateTo { get; set; }
 
         [DisplayName("Laikas (nuo)")]
@@ -48,7 +50,7 @@ namespace Autoservisas.Models
             List<WorkHours> workhours = new List<WorkHours>();
             connection();
 
-            SqlCommand cmd = new SqlCommand("GetPartDetails", con);
+            SqlCommand cmd = new SqlCommand("GetWorkHours", con);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<Autoservisas.Models.WorkHours>
 
+<div class="form-horizontal">
+    <h4>@Html.ActionLink("Pridėti darbo laiką", "AddTime", "WorkHours")</h4>
+</div>
+<br />
+<br />
+
 
 <table class="table">
     <tr>
@@ -20,18 +26,18 @@
     @foreach (var item in Model)
     {
         <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateFrom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateTo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeFrom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeTo)
-                </td>
+            <td>
+                @Html.Raw(item.DateFrom.ToString("d"))
+            </td>
+            <td>
+                @Html.Raw(item.DateTo.ToString("d"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeTo)
+            </td>
         </tr>
     }
 
