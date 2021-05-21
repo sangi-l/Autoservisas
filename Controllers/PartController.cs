@@ -39,5 +39,19 @@ namespace Autoservisas.Controllers
                 return View();
             }
         }
+
+        // GET: ManualChoose
+        public ActionResult ManualChooseIndex()
+        {
+            Part db = new Part();
+            return View("ManualChooseIndex", db.GetCategories());
+        }
+
+        public ActionResult ManualChooseParts(string category)
+        {
+            Part db = new Part();
+            //return View(db.GetPart().Find(model => model.PartID == id));
+            return View("ManualChooseParts", db.GetPartsFromCategory(category));
+        }
     }
 }

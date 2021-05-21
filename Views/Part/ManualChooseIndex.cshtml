@@ -1,0 +1,21 @@
+﻿@model List<String>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Pasirinkite detalių kategorija:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item, "ManualChooseParts", new { category = item })
+            </td>
+        </tr>
+    }
+
+</table>
