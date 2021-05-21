@@ -79,5 +79,14 @@ namespace Autoservisas.Models
 
             return workhours;
         }
+
+        public bool AddTime(WorkHours time)
+        {
+            connection();
+
+
+
+            return true;
+        }
     }
 }
