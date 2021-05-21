@@ -99,7 +99,7 @@ namespace Autoservisas.Models
         public bool UpdateAmmount(Part model)
         {
             connection();
-            SqlCommand cmd = new SqlCommand("UpdatePartAmmount", con);
+            SqlCommand cmd = new SqlCommand("UpdatePartDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@id_detale", model.PartID);
