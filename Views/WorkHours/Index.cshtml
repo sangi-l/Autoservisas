@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Autoservisas.Models.WorkHours>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nuo (Data)
+        </th>
+        <th>
+            Iki (Data)
+        </th>
+        <th>
+            Nuo (Laikas)
+        </th>
+        <th>
+            Iki (Laikas)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeTo)
+                </td>
+        </tr>
+    }
+
+</table>

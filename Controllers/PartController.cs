@@ -50,7 +50,6 @@ namespace Autoservisas.Controllers
         public ActionResult ManualChooseParts(string category)
         {
             Part db = new Part();
-            //return View(db.GetPart().Find(model => model.PartID == id));
             return View("ManualChooseParts", db.GetPartsFromCategory(category));
         }
     }
