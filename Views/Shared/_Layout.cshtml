@@ -26,6 +26,7 @@
                     {
                         <li>@Html.ActionLink("Simptomai", "Index", "Symptom")</li>
                         <li>@Html.ActionLink("Detalės", "Index", "Part")</li>
+                        <li>@Html.ActionLink("ManualChoose", "ManualChooseIndex", "Part")</li>
                     }
                     @if (Auth.GetRole() == (int)Auth.Roles.Mechanic)
                     {

@@ -177,6 +177,8 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Part\Index.cshtml" />
     <Content Include="Views\Part\Edit.cshtml" />
+    <Content Include="Views\Part\ManualChooseIndex.cshtml" />
+    <Content Include="Views\Part\ManualChooseParts.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

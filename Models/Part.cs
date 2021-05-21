@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace Autoservisas.Models
 {
@@ -113,6 +114,71 @@ namespace Autoservisas.Models
                 return true;
             else
                 return false;
+        }
+
+        public List<String> GetCategories()
+        {
+            List<String> Categories = new List<String>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetPartDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach(DataRow dr in dt.Rows)
+            {
+                string category = Convert.ToString(dr["kategorija"]);
+                if (!Categories.Contains(category))
+                {
+                    Categories.Add(category);
+                }
+            }
+
+            return Categories;
+        }
+
+        public List<Part> GetPartsFromCategory(string category)
+        {
+            List<Part> parts = new List<Part>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetPartDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                string cat = Convert.ToString(dr["kategorija"]);
+                if (cat == category)
+                {
+                    parts.Add(
+                    new Part
+                    {
+                        PartID = Convert.ToInt32(dr["id_detale"]),
+                        Price = Convert.ToDouble(dr["kaina"]),
+                        Name = Convert.ToString(dr["pavadinimas"]),
+                        Code = Convert.ToInt32(dr["detales_kodas"]),
+                        Tags = Convert.ToString(dr["zymos"]),
+                        Picture = Convert.ToString(dr["nuotrauka"]),
+                        Details = Convert.ToString(dr["aprasymas"]),
+                        Ammount = Convert.ToInt32(dr["likutis"]),
+                        Quality = Convert.ToInt32(dr["kokybe"]),
+                        Category = cat,
+                        Originallity = Convert.ToBoolean(dr["orginalumas"])
+                    });
+                }
+            }
+            return parts;
         }
     }
 }

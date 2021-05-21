@@ -1,0 +1,24 @@
+﻿@model List<String>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Kategorija
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item, "ManualChooseParts", new { category = item })
+            </td>
+            <td>
+                @Html.ActionLink("Papildyti", "Edit")
+            </td>
+        </tr>
+    }
+
+</table>
