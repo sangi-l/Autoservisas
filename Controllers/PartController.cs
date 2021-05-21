@@ -52,5 +52,27 @@ namespace Autoservisas.Controllers
             Part db = new Part();
             return View("ManualChooseParts", db.GetPartsFromCategory(category));
         }
+
+        public ActionResult Buy(int id)
+        {
+            Part part = new Part();
+            if (Session["cart"] == null)
+            {
+                List<Part> cart = new List<Part>();
+                List<Part> partlist = part.GetPart();
+                Part onepart = partlist.Find(item => item.PartID == id);
+                cart.Add(onepart);
+                Session["cart"] = cart;
+            }
+            else
+            {
+                List<Part> cart = (List<Part>)Session["cart"];
+                List<Part> partlist = part.GetPart();
+                Part onepart = partlist.Find(item => item.PartID == id);
+                cart.Add(onepart);
+                Session["cart"] = cart;
+            }
+            return RedirectToAction("Index", "Cart");
+        }
     }
 }
