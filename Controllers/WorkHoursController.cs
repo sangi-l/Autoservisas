@@ -25,12 +25,13 @@ namespace Autoservisas.Controllers
 
         // POST: AddTime
         [HttpPost]
-        public ActionResult AddNewTime(WorkHours time)
+        public ActionResult AddTime(WorkHours time)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    time.MechanicID = Auth.GetUserId();
                     WorkHours db = new WorkHours();
                     if (db.AddTime(time))
                     {

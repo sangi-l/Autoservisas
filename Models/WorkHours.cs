@@ -84,9 +84,23 @@ namespace Autoservisas.Models
         {
             connection();
 
+            SqlCommand cmd = new SqlCommand("AddNewTime", con);
+            cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.Parameters.AddWithValue("@data", time.DateFrom);
+            cmd.Parameters.AddWithValue("@laikas_nuo", time.TimeFrom);
+            cmd.Parameters.AddWithValue("@data_iki", time.DateTo);
+            cmd.Parameters.AddWithValue("@laikas_iki", time.TimeTo);
+            cmd.Parameters.AddWithValue("@fk_meistrasid", time.MechanicID);
 
-            return true;
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
         }
     }
 }
