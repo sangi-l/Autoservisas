@@ -31,12 +31,21 @@ namespace Autoservisas.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    time.MechanicID = Auth.GetUserId();
-                    WorkHours db = new WorkHours();
-                    if (db.AddTime(time))
+                    if (time.TimeTo - time.TimeFrom <= 9)
                     {
-                        return RedirectToAction("Index", "WorkHours");
+                        time.MechanicID = Auth.GetUserId();
+                        WorkHours db = new WorkHours();
+                        if (db.AddTime(time))
+                        {
+                            return RedirectToAction("Index", "WorkHours");
+                        }
                     }
+                    else
+                    {
+                        ViewData["Error"] = "Negalima dirbti daugiau nei 9h per dieną!";
+                        return View();
+                    }
+
                 }
                 return View();
             }
