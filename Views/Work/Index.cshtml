@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Autoservisas.Models.Work>
+
+<table class="table">
+    <tr>
+        <th>
+            Data
+        </th>
+        <th>
+            Marke
+        </th>
+        <th>
+            Modelis
+        </th>
+        <th>
+            Tūris
+        </th>
+        <th>
+            Pagaminimo data
+        </th>
+        <th>
+            Kuro tipas
+        </th>
+        <th>
+            Valstybinis nr.
+        </th>
+        <th>
+            Darbo kaina
+        </th>
+        <th>
+            Pabaigos data
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.Raw(item.Data.ToString("d"))
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Make)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Model)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Displacement)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MakeDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FuelType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Plate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.finishedDate)
+    </td>
+</tr>
+}
+
+</table>

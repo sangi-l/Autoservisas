@@ -123,6 +123,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\SymptomController.cs" />
+    <Compile Include="Controllers\WorkController.cs" />
     <Compile Include="Controllers\WorkHoursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -133,6 +134,7 @@
     <Compile Include="Models\Registered_User.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Symptom.cs" />
+    <Compile Include="Models\Work.cs" />
     <Compile Include="Models\WorkHours.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -187,6 +189,7 @@
     <Content Include="Views\WorkHours\AddTime.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Reservation\BreakFormView.cshtml" />
+    <Content Include="Views\Work\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

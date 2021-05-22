@@ -32,6 +32,7 @@
                     @if (Auth.GetRole() == (int)Auth.Roles.Mechanic)
                     {
                         <li>@Html.ActionLink("Pasirinkti darbo valandas", "Index", "WorkHours")</li>
+                        <li>@Html.ActionLink("Peržiūrėti dienos darbus", "Index", "Work")</li>
                         <li>@Html.ActionLink("Pirkinių krepšelis", "Index", "Cart")</li>
                     }
                     @if (Auth.GetRole() == (int)Auth.Roles.Administrator)
