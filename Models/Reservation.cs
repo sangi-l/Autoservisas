@@ -23,9 +23,10 @@ namespace Autoservisas.Models
 
         [DisplayName("Pagaminimo metai")]
         [Required]
+        [DataType(DataType.Date)]
         public DateTime CDate { get; set; }
 
-        [DisplayName("Turis")]
+        [DisplayName("Tūris")]
         [Required]
         public double ESize { get; set; }
 
@@ -45,7 +46,11 @@ namespace Autoservisas.Models
         [Required]
         public double WPrice { get; set; }
 
-        [DisplayName("Marke")]
+        [DisplayName("Markė")]
+        [Required]
+        public IEnumerable<string> Types { get; set; }
+
+        [DisplayName("Markė")]
         [Required]
         public string Type { get; set; }
 
@@ -53,11 +58,15 @@ namespace Autoservisas.Models
         [Required]
         public string FuelType { get; set; }
 
-        [DisplayName("Kategorija")]
+        [DisplayName("Kuro tipas")]
+        [Required]
+        public IEnumerable<string> FuelTypes { get; set; }
+
+        [DisplayName("Reikalingo meistro kategorija")]
         [Required]
         public IEnumerable<string> Category { get; set; }
 
-        [DisplayName("Simptomo aprasymas")]
+        [DisplayName("Simptomo aprašymas")]
         [Required]
         public string SymptomData { get; set; }
 
@@ -92,6 +101,23 @@ namespace Autoservisas.Models
             }
 
             return Categories;
+        }
+
+        public List<String> GetTypes()
+        {
+            string[] types = { "bmw", "audi", "opel", "toyota", "skoda", "saab", "seat", "alfa romeo", "fiat", "volkswagen", "volvo", "nissan",
+                "kia", "mercedes", "porsche", "citroen", "renault", "peugeot", "dacia", "dodge", "cadilac", "chevrolet", "ford", "chrysler",
+                "honda", "hyundai", "jaguar", "jeep", "lexus", "mazda", "mini", "mitsubishi", "subaru" };
+            List<String> Types = new List<String>(types);
+
+            return Types;
+        }
+        public List<String> GetFuelTypes()
+        {
+            string[] types = { "dyzelinas", "benzinas", "dujos/benzinas", "elektra", "dyzelinas/elektra", "benzinas/elektra" };
+            List<String> FuelTypes = new List<String>(types);
+
+            return FuelTypes;
         }
 
         public List<Mechanic> GetMechanicsFromCategory(string category)

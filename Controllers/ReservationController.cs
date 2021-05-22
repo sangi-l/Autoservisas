@@ -14,6 +14,8 @@ namespace Prototipas.Controllers
         {
             Reservation db = new Reservation();
             db.Category = db.GetCategories();
+            db.Types = db.GetTypes();
+            db.FuelTypes = db.GetFuelTypes();
             return View(db);
         }
 
