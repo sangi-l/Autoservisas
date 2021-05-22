@@ -29,5 +29,40 @@ namespace Prototipas.Controllers
             Session["cart"] = cart;
             return RedirectToAction("Index");
         }
+        public ActionResult Pay()
+        {
+            PayInfo info = new PayInfo();
+            return View(info);
+        }
+        public ActionResult Send()
+        {
+            SendEmail();
+            return RedirectToAction("Index");
+        }
+        public void SendEmail()
+        {
+            var username = "ktuautoproject@gmail.com";
+            var password = "autoproject";
+
+            string toEmail = "igansbiz@gmail.com";
+
+                SmtpClient client = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(username, password)
+                };
+
+            using (var message = new MailMessage(username, toEmail))
+            {
+                message.Subject = "Mokėjimas";
+                message.Body = "Mokėjimas atliktas";
+                message.IsBodyHtml = false;
+                client.Send(message);
+            }
+        }
     }
 }

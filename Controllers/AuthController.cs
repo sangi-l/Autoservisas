@@ -77,30 +77,6 @@ namespace Autoservisas.Controllers
                 return View();
             }
         }
-        
-        private void SendEmail(string toEmail)
-        {
-            var username = "..ktu";
-            var password = "..ktu";
-
-            SmtpClient client = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(username, password)
-            };
-
-            using (var message = new MailMessage(username, toEmail))
-            {
-                message.Subject = " ";
-                message.Body = " ";
-                message.IsBodyHtml = false;
-                client.Send(message);
-            }
-        }
     }
 
     public static class Auth
