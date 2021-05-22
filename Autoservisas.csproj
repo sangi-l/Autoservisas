@@ -122,6 +122,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\SymptomController.cs" />
     <Compile Include="Controllers\WorkController.cs" />
     <Compile Include="Controllers\WorkHoursController.cs" />
