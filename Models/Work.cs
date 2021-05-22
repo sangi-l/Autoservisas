@@ -66,6 +66,18 @@ namespace Autoservisas.Models
         [Required]
         public int MechanicID { get; set; }
 
+        [DisplayName("Ar parinkti tik orginalias dalis?")]
+        [Required]
+        public bool OriginalParts { get; set; }
+
+        [DisplayName("Ar parinkti tik kokybiškiausias dalis?")]
+        [Required]
+        public bool QualityParts { get; set; }
+
+        [DisplayName("Ar parinkti detales kurios kainuoja mažiau nei vidutinė jų kainą?")]
+        [Required]
+        public bool AvgPrice { get; set; }
+
         private SqlConnection con;
         private void connection()
         {
@@ -173,9 +185,9 @@ namespace Autoservisas.Models
                 return false;
         }
 
-        public List<string> FindSymptoms(int id)
+        public string FindSymptoms(int id)
         {
-            List<string> symptoms = new List<string>();
+            string symptom = "";
             connection();
 
             SqlCommand cmd = new SqlCommand("GetSymptomsIdFromReservation", con);
@@ -189,19 +201,18 @@ namespace Autoservisas.Models
             sd.Fill(dt);
             con.Close();
 
-            List<int> ids = new List<int>();
+            int sid = -1;
             foreach (DataRow dr in dt.Rows)
             {
-                //Debug.WriteLine(dr["fk_simptomasid"]);
-                ids.Add(Convert.ToInt32(dr["fk_simtptomasid"]));
+                sid = Convert.ToInt32(dr["fk_simptomasid"]);
             }
 
-            
-            SqlCommand cmd2 = new SqlCommand("GetSymptomsIdFromReservation", con);
-            cmd.Parameters.AddWithValue("@id_rezervacija", ids.ToArray());
 
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter sd2 = new SqlDataAdapter(cmd);
+            SqlCommand cmd2 = new SqlCommand("GetSymptomsDescFromID", con);
+            cmd2.Parameters.AddWithValue("@id", sid);
+
+            cmd2.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd2 = new SqlDataAdapter(cmd2);
             DataTable dt2 = new DataTable();
 
 
@@ -209,7 +220,68 @@ namespace Autoservisas.Models
             sd2.Fill(dt2);
             con.Close();
 
-            return symptoms;
+            foreach (DataRow dr in dt2.Rows)
+            {
+                symptom = Convert.ToString(dr["aprasymas"]);
+            }
+
+            return symptom;
+        }
+
+
+        public List<Part> FilterBySymptom(string symptom)
+        {
+            List<Part> parts = new List<Part>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetPartDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                string smp = Convert.ToString(dr["zymos"]);
+                if (smp == symptom)
+                {
+                    parts.Add(
+                        new Part
+                        {
+                            PartID = Convert.ToInt32(dr["id_detale"]),
+                            Price = Convert.ToDouble(dr["kaina"]),
+                            Name = Convert.ToString(dr["pavadinimas"]),
+                            Code = Convert.ToInt32(dr["detales_kodas"]),
+                            Tags = smp,
+                            Picture = Convert.ToString(dr["nuotrauka"]),
+                            Details = Convert.ToString(dr["aprasymas"]),
+                            Ammount = Convert.ToInt32(dr["likutis"]),
+                            Quality = Convert.ToInt32(dr["kokybe"]),
+                            Category = Convert.ToString(dr["kategorija"]),
+                            Originallity = Convert.ToBoolean(dr["orginalumas"])
+                        }
+                        );
+                }
+            }
+
+            return parts;
+        }
+
+        public double AveragePrice(List<Part> parts)
+        {
+            double avg = 0;
+
+            foreach(var item in parts)
+            {
+                avg += item.Price;
+            }
+
+            avg = avg / parts.Count;
+
+            return avg;
         }
     }
 }
