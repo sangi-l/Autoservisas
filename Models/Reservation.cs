@@ -43,11 +43,11 @@ namespace Autoservisas.Models
 
         [DisplayName("Darbo kaina")]
         [Required]
-        public string WPrice { get; set; }
+        public double WPrice { get; set; }
 
         [DisplayName("Marke")]
         [Required]
-        public IEnumerable<string> Type { get; set; }
+        public string Type { get; set; }
 
         [DisplayName("Kuro tipas")]
         [Required]
@@ -145,6 +145,46 @@ namespace Autoservisas.Models
                 return true;
             else
                 return false;
+        }
+
+        
+        public List<Reservation> GetReservation(int id)
+        {
+            List<Reservation> reservation = new List<Reservation>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetReservationDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                int rid = Convert.ToInt32(dr["id_rezervacija"]);
+                if (rid == id)
+                {
+                    reservation.Add(
+                    new Reservation
+                    {
+                        Date = Convert.ToDateTime(dr["data"]),
+                        Type = Convert.ToString(dr["marke"]),
+                        Model = Convert.ToString(dr["modelis"]),
+                        ESize = Convert.ToDouble(dr["turis"]),
+                        CDate = Convert.ToDateTime(dr["pagaminimo_metai"]),
+                        FuelType = Convert.ToString(dr["kuro_tipas"]),
+                        CarNumber = Convert.ToString(dr["valstybinis_nr"]),
+                        WPrice = Convert.ToDouble(dr["darbo_kaina"]),
+                        Sum = Convert.ToDouble(dr["suma"]),
+                        EDate = Convert.ToDateTime(dr["pabaigos_data"]),
+                    }); ;
+                }
+            }
+
+            return reservation;
         }
     }
 }

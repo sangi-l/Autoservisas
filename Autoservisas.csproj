@@ -193,6 +193,7 @@
     <Content Include="Views\Reservation\BreakFormView.cshtml" />
     <Content Include="Views\Work\Index.cshtml" />
     <Content Include="Views\Cart\Pay.cshtml" />
+    <Content Include="Views\Reservation\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
