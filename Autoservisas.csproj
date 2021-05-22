@@ -131,6 +131,7 @@
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\Mechanic.cs" />
+    <Compile Include="Models\PayInfo.cs" />
     <Compile Include="Models\Registered_User.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Symptom.cs" />
@@ -190,6 +191,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Reservation\BreakFormView.cshtml" />
     <Content Include="Views\Work\Index.cshtml" />
+    <Content Include="Views\Cart\Pay.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
