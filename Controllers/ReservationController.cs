@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Autoservisas.Models;
+using System.Diagnostics;
 
 namespace Prototipas.Controllers
 {
@@ -19,10 +20,17 @@ namespace Prototipas.Controllers
             return View(db);
         }
 
-        public ActionResult BreakFormViewMechanic(string category)
+        public ActionResult BreakFormView(Reservation category)
+        {
+            return View("BreakFormViewMechanic", category.Categoryy);
+        }
+
+        public ActionResult BreakFormViewMechanic(Reservation MV)
         {
             Reservation db = new Reservation();
-            return View("BreakFormViewMechanic", db.GetMechanicsFromCategory(category));
+            string selectedvalue = MV.Categoryy;
+            Debug.WriteLine(selectedvalue);
+            return View("BreakFormViewMechanic", db.GetMechanicsFromCategory(selectedvalue));
         }
     }
 }

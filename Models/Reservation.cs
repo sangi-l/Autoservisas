@@ -66,6 +66,10 @@ namespace Autoservisas.Models
         [Required]
         public IEnumerable<string> Category { get; set; }
 
+        [DisplayName("Reikalingo meistro kategorija")]
+        [Required]
+        public string Categoryy { get; set; }
+
         [DisplayName("Simptomo aprašymas")]
         [Required]
         public string SymptomData { get; set; }
