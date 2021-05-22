@@ -131,6 +131,7 @@
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\Mechanic.cs" />
     <Compile Include="Models\Registered_User.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Symptom.cs" />
     <Compile Include="Models\WorkHours.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,6 +186,7 @@
     <Content Include="Views\WorkHours\Index.cshtml" />
     <Content Include="Views\WorkHours\AddTime.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Reservation\BreakFormView.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
