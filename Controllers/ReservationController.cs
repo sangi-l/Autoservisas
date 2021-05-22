@@ -12,7 +12,9 @@ namespace Prototipas.Controllers
         // GET: Reservation
         public ActionResult BreakFormView()
         {
-            return View();
+            Reservation db = new Reservation();
+            db.Category = db.GetCategories();
+            return View(db);
         }
 
         // GET: Work/Edit
@@ -21,5 +23,6 @@ namespace Prototipas.Controllers
             Reservation db = new Reservation();
             return View(db.GetReservation(id));
         }
+
     }
 }
