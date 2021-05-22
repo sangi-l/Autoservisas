@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -172,12 +173,41 @@ namespace Autoservisas.Models
                 return false;
         }
 
-        public List<string> FindSymptoms()
+        public List<string> FindSymptoms(int id)
         {
             List<string> symptoms = new List<string>();
             connection();
 
+            SqlCommand cmd = new SqlCommand("GetSymptomsIdFromReservation", con);
+            cmd.Parameters.AddWithValue("@id_rezervacija", id);
 
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            List<int> ids = new List<int>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                //Debug.WriteLine(dr["fk_simptomasid"]);
+                ids.Add(Convert.ToInt32(dr["fk_simtptomasid"]));
+            }
+
+            
+            SqlCommand cmd2 = new SqlCommand("GetSymptomsIdFromReservation", con);
+            cmd.Parameters.AddWithValue("@id_rezervacija", ids.ToArray());
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd2 = new SqlDataAdapter(cmd);
+            DataTable dt2 = new DataTable();
+
+
+            con.Open();
+            sd2.Fill(dt2);
+            con.Close();
 
             return symptoms;
         }

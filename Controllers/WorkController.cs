@@ -39,5 +39,13 @@ namespace Autoservisas.Controllers
                 return View();
             }
         }
+
+        // GET: Automatisation
+        public ActionResult Automatisation()
+        {
+            Work db = new Work();
+            
+            return View(db.FindSymptoms(5));
+        }
     }
 }

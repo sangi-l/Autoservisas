@@ -19,12 +19,5 @@ namespace Prototipas.Controllers
             return View(db);
         }
 
-        // GET: Work/Edit
-        public ActionResult Edit(int id)
-        {
-            Reservation db = new Reservation();
-            return View(db.GetReservation(id));
-        }
-
     }
 }
