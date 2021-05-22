@@ -30,7 +30,10 @@ namespace Autoservisas.Controllers
             Mechanic mechanic = new Mechanic();
             Administrator administrator = new Administrator();
             int userid = db.GetUserId(email, password);
-            Auth.SetUserId(userid);
+            if(userid != 0)
+            {
+                Auth.SetUserId(userid);
+            }
             if (mechanic.IsMechanic(userid))
             {
                 Auth.SetRole((int)Auth.Roles.Mechanic);
@@ -41,7 +44,10 @@ namespace Autoservisas.Controllers
                 Auth.SetRole((int)Auth.Roles.Administrator);
                 return RedirectToAction("Index", "Home");
             }
-            Auth.SetRole((int)Auth.Roles.User);
+            if(userid != 0)
+            {
+                Auth.SetRole((int)Auth.Roles.User);
+            }
             return RedirectToAction("Index", "Home");
         }
 

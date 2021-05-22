@@ -10,12 +10,14 @@
 {
     if (Model)
     {
-    <script>
-    var answer = confirm("Trūksta detalių, ar norite būti perkelti į detalių sąrašą?")
+        <script type="text/javascript">
+            setInterval(
+                function () {
+                    var answer = confirm("Trūksta detalių, ar norite būti perkelti į detalių sąrašą?")
 
-    if (answer) { window.location = "/Part/Index"; }
-
-    </script>
+                    if (answer) { window.location = "/Part/Index"; }
+                }, 10000)
+        </script>
     }
  }
 

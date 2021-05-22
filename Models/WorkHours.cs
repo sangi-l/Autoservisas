@@ -20,11 +20,6 @@ namespace Autoservisas.Models
         [DataType(DataType.Date)]
         public DateTime DateFrom { get; set; }
 
-        [DisplayName("Data (iki)")]
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime DateTo { get; set; }
-
         [DisplayName("Laikas (nuo)")]
         [Required]
         public int TimeFrom { get; set; }
@@ -69,7 +64,6 @@ namespace Autoservisas.Models
                     {
                         TimeID = Convert.ToInt32(dr["id_darbo_laikas"]),
                         DateFrom = Convert.ToDateTime(dr["data"]),
-                        DateTo = Convert.ToDateTime(dr["data_iki"]),
                         TimeFrom = Convert.ToInt32(dr["laikas_nuo"]),
                         TimeTo = Convert.ToInt32(dr["laikas_iki"]),
                         MechanicID = mid
@@ -89,7 +83,6 @@ namespace Autoservisas.Models
 
             cmd.Parameters.AddWithValue("@data", time.DateFrom);
             cmd.Parameters.AddWithValue("@laikas_nuo", time.TimeFrom);
-            cmd.Parameters.AddWithValue("@data_iki", time.DateTo);
             cmd.Parameters.AddWithValue("@laikas_iki", time.TimeTo);
             cmd.Parameters.AddWithValue("@fk_meistrasid", time.MechanicID);
 
