@@ -171,5 +171,15 @@ namespace Autoservisas.Models
             else
                 return false;
         }
+
+        public List<string> FindSymptoms()
+        {
+            List<string> symptoms = new List<string>();
+            connection();
+
+
+
+            return symptoms;
+        }
     }
 }
