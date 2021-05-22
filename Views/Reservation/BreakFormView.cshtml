@@ -81,9 +81,10 @@
             @Html.ValidationMessageFor(x => x.Category, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group"> 
-        <div class="col-md-10">
-            @Html.ActionLink("Tęsti", "BreakFormViewMechanic", new { Category = Model.Category }, new { @class = "btn btn-primary btn-large" })
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Sukurti" class="btn btn-default" />
         </div>
     </div>
 </div>

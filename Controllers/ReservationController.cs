@@ -18,14 +18,6 @@ namespace Prototipas.Controllers
             db.FuelTypes = db.GetFuelTypes();
             return View(db);
         }
-<<<<<<< Updated upstream
 
-=======
-        public ActionResult BreakFormViewMechanic(string category)
-        {
-            Reservation db = new Reservation();
-            return View("BreakFormViewMechanic", db.GetMechanicsFromCategory(category));
-        }
->>>>>>> Stashed changes
     }
 }
