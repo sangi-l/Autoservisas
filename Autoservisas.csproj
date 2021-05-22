@@ -194,6 +194,7 @@
     <Content Include="Views\Work\Index.cshtml" />
     <Content Include="Views\Cart\Pay.cshtml" />
     <Content Include="Views\Work\Edit.cshtml" />
+    <Content Include="Views\WorkHours\Automatisation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
