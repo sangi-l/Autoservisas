@@ -27,7 +27,7 @@ namespace Autoservisas.Models
 
         [DisplayName("Modelis")]
         [Required]
-        public string Model { get; set; }
+        public string Name { get; set; }
 
         [DisplayName("Tūris")]
         [Required]
@@ -36,6 +36,7 @@ namespace Autoservisas.Models
         [DisplayName("Pagaminimo Metai")]
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MakeDate { get; set; }
 
         [DisplayName("Kuro tipas")]
@@ -57,6 +58,7 @@ namespace Autoservisas.Models
         [DisplayName("Pabaigos Data")]
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime finishedDate { get; set; }
 
         [DisplayName("Meistro ID")]
@@ -95,7 +97,7 @@ namespace Autoservisas.Models
                         ReservationID = Convert.ToInt32(dr["id_rezervacija"]),
                         Data = Convert.ToDateTime(dr["data"]),
                         Make = Convert.ToString(dr["marke"]),
-                        Model = Convert.ToString(dr["modelis"]),
+                        Name = Convert.ToString(dr["modelis"]),
                         Displacement = Convert.ToDouble(dr["turis"]),
                         MakeDate = Convert.ToDateTime(dr["pagaminimo_metai"]),
                         FuelType = Convert.ToString(dr["kuro_tipas"]),
@@ -135,9 +137,9 @@ namespace Autoservisas.Models
                         ReservationID = rid,
                         Data = Convert.ToDateTime(dr["data"]),
                         Make = Convert.ToString(dr["marke"]),
-                        Model = Convert.ToString(dr["modelis"]),
+                        Name = Convert.ToString(dr["modelis"]),
                         Displacement = Convert.ToDouble(dr["turis"]),
-                        MakeDate = Convert.ToDateTime(dr["pagaminimo_metai"]),
+                        MakeDate = Convert.ToDateTime(dr["pagaminimo_metai"]).Date,
                         FuelType = Convert.ToString(dr["kuro_tipas"]),
                         Plate = Convert.ToString(dr["valstybinis_nr"]),
                         Price = Convert.ToDouble(dr["darbo_kaina"]),
@@ -153,13 +155,18 @@ namespace Autoservisas.Models
         public bool UpdateDetails(Work model)
         {
             connection();
-            SqlCommand cmd = new SqlCommand("UpdateSymptomDetails", con);
+            SqlCommand cmd = new SqlCommand("UpdateReservationDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@id_simptomas", model.SymptomID);
-            cmd.Parameters.AddWithValue("@aprasymas", model.Details);
-            cmd.Parameters.AddWithValue("@kaina", model.Price);
-            cmd.Parameters.AddWithValue("@trukme", model.Duration);
+            cmd.Parameters.AddWithValue("@id_rezervacija", model.ReservationID);
+            cmd.Parameters.AddWithValue("@modelis", model.Name);
+            cmd.Parameters.AddWithValue("@marke", model.Make);
+            cmd.Parameters.AddWithValue("@pagaminimo_metai", model.MakeDate);
+            cmd.Parameters.AddWithValue("@turis", model.Displacement);
+            cmd.Parameters.AddWithValue("@kuro_tipas", model.FuelType);
+            cmd.Parameters.AddWithValue("@valstybinis_nr", model.Plate);
+            cmd.Parameters.AddWithValue("@darbo_kaina", model.Price);
+            cmd.Parameters.AddWithValue("@pabaigos_data", model.finishedDate);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();

@@ -26,7 +26,7 @@ namespace Autoservisas.Controllers
 
         // POST: Work/Edit
         [HttpPost]
-        public ActionResult Edit(int id, Work model)
+        public ActionResult Edit(Work model)
         {
             try
             {
