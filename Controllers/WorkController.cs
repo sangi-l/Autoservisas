@@ -67,45 +67,24 @@ namespace Autoservisas.Controllers
                     {
                         if(item.Ammount > 0)
                         {
-                            bool passed1 = false;
-                            bool passed2 = false;
-                            bool passed3 = false;
-                            
-                            if(model.OriginalParts)
-                            {
-                                if (item.Originallity)
-                                    passed1 = true;
-                            }
-
-                            if(model.QualityParts)
-                            {
-                                if (item.Quality > 3)
-                                    passed2 = true;
-                            }
-
-                            if(model.AvgPrice)
-                            {
-                                if (item.Price < avgPrice)
-                                    passed3 = true;
-                            }
-
-                            if(model.OriginalParts == passed1 && model.QualityParts == passed2 && 
-                                model.AvgPrice == passed3)
+                            if(CheckByCriteria(model.OriginalParts, model.QualityParts, model.AvgPrice, avgPrice, item))
                             {
                                 changeableParts.Add(item);
-                                allParts.Remove(item);
+                                AddToPartList(item);
+                                RemovePartFromList(allParts, item);
                                 break;
                             }
                             else
                             {
-                                allParts.Remove(item);
+
+                                RemovePartFromList(allParts, item);
                                 break;
                             }
 
                         }
                         else
                         {
-                            allParts.Remove(item);
+                            RemovePartFromList(allParts, item);
                             break;
                         }
                     }
@@ -113,7 +92,7 @@ namespace Autoservisas.Controllers
 
                 foreach(var item in changeableParts)
                 {
-                    Debug.WriteLine(item.Name);
+                    Debug.WriteLine(item.Name + " " + item.Code);
                 }
 
                 Debug.WriteLine(model.ReservationID);
@@ -130,6 +109,51 @@ namespace Autoservisas.Controllers
             {
                 return View();
             }
+        }
+
+        private void RemovePartFromList(List<Part> list, Part item)
+        {
+            list.Remove(item);
+        }
+
+        private bool CheckByCriteria(bool OriginalParts, bool QualityParts, bool AvgPrice, double avgPrice, Part item)
+        {
+            bool passed = false;
+
+            bool passed1 = false;
+            bool passed2 = false;
+            bool passed3 = false;
+
+            if (OriginalParts)
+            {
+                if (item.Originallity)
+                    passed1 = true;
+            }
+
+            if (QualityParts)
+            {
+                if (item.Quality > 3)
+                    passed2 = true;
+            }
+
+            if (AvgPrice)
+            {
+                if (item.Price < avgPrice)
+                    passed3 = true;
+            }
+
+            if (OriginalParts == passed1 && QualityParts == passed2 &&
+                AvgPrice == passed3)
+            {
+                passed = true;
+            }
+
+                return passed;
+        }
+
+        private void AddToPartList(Part item)
+        {
+
         }
     }
 }
