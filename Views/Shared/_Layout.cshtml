@@ -28,6 +28,7 @@
                         <li>@Html.ActionLink("Detalės", "Index", "Part")</li>
                         <li>@Html.ActionLink("Rankinis Detalių parinkimas", "ManualChooseIndex", "Part")</li>
                         <li>@Html.ActionLink("Pirkinių krepšelis", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("Pildyti gedimo formą", "BreakFormView", "Reservation")</li>
                     }
                     @if (Auth.GetRole() == (int)Auth.Roles.Mechanic)
                     {
