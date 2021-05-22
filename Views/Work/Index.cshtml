@@ -69,7 +69,7 @@
         @Html.DisplayFor(modelItem => item.finishedDate)
     </td>
     <th>
-        @Html.ActionLink("Papildyti", "Edit", "Reservation", new { id = item.ReservationID })
+        @Html.ActionLink("Papildyti", "Edit", new { id = item.ReservationID })
     </th>
 </tr>
 }

@@ -111,9 +111,9 @@ namespace Autoservisas.Models
             return work;
         }
 
-        public List<Work> GetReservation(int id)
+        public Work GetReservation(int id)
         {
-            List<Work> reservation = new List<Work>();
+            Work reservation = new Work();
             connection();
 
             SqlCommand cmd = new SqlCommand("GetReservationDetails", con);
@@ -130,9 +130,9 @@ namespace Autoservisas.Models
                 int rid = Convert.ToInt32(dr["id_rezervacija"]);
                 if (rid == id)
                 {
-                    reservation.Add(
-                    new Work
+                    reservation = new Work
                     {
+                        ReservationID = rid,
                         Data = Convert.ToDateTime(dr["data"]),
                         Make = Convert.ToString(dr["marke"]),
                         Model = Convert.ToString(dr["modelis"]),
@@ -143,11 +143,32 @@ namespace Autoservisas.Models
                         Price = Convert.ToDouble(dr["darbo_kaina"]),
                         Sum = Convert.ToDouble(dr["suma"]),
                         finishedDate = Convert.ToDateTime(dr["pabaigos_data"]),
-                    }); ;
+                    };
                 }
             }
 
             return reservation;
+        }
+
+        public bool UpdateDetails(Work model)
+        {
+            connection();
+            SqlCommand cmd = new SqlCommand("UpdateSymptomDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@id_simptomas", model.SymptomID);
+            cmd.Parameters.AddWithValue("@aprasymas", model.Details);
+            cmd.Parameters.AddWithValue("@kaina", model.Price);
+            cmd.Parameters.AddWithValue("@trukme", model.Duration);
+
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
         }
     }
 }

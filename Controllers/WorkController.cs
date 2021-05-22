@@ -20,8 +20,24 @@ namespace Autoservisas.Controllers
         // GET: Work/Edit
         public ActionResult Edit(int id)
         {
-            Reservation db = new Reservation();
+            Work db = new Work();
             return View(db.GetReservation(id));
+        }
+
+        // POST: Work/Edit
+        [HttpPost]
+        public ActionResult Edit(int id, Work model)
+        {
+            try
+            {
+                Work db = new Work();
+                db.UpdateDetails(model);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
