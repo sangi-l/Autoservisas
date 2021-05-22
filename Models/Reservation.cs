@@ -70,6 +70,10 @@ namespace Autoservisas.Models
         [Required]
         public string SymptomData { get; set; }
 
+        [DisplayName("Meistras")]
+        [Required]
+        public string Mechanic { get; set; }
+
         private SqlConnection con;
         private void connection()
         {

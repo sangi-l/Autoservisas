@@ -195,6 +195,7 @@
     <Content Include="Views\Cart\Pay.cshtml" />
     <Content Include="Views\Work\Edit.cshtml" />
     <Content Include="Views\Work\Automatisation.cshtml" />
+    <Content Include="Views\Reservation\BreakFormViewMechanic.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

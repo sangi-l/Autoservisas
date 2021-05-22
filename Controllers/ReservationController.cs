@@ -19,5 +19,10 @@ namespace Prototipas.Controllers
             return View(db);
         }
 
+        public ActionResult BreakFormViewMechanic(string category)
+        {
+            Reservation db = new Reservation();
+            return View("BreakFormViewMechanic", db.GetMechanicsFromCategory(category));
+        }
     }
 }
