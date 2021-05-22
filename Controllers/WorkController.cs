@@ -11,8 +11,19 @@ namespace Autoservisas.Controllers
     public class WorkController : Controller
     {
         // GET: Work
-        public ActionResult Index()
+        public ActionResult Index(int count = -1)
         {
+            Debug.WriteLine(count);
+            if(count > 0)
+            {
+                ViewData["Error"] = "Detalės sėkmingai parinktos!";
+            }
+
+            if(count == 0)
+            {
+                ViewData["Error"] = "Automatinė paieška detalių nerado!";
+            }
+
             Work db = new Work();
             int id = Auth.GetUserId();
             return View(db.GetWork(id));
@@ -60,18 +71,20 @@ namespace Autoservisas.Controllers
                 List<Part> allParts = db.FilterBySymptom(symptom);
                 double avgPrice = db.AveragePrice(allParts);
                 List<Part> changeableParts = new List<Part>();
+                int count = 0;
 
-                while(allParts.Count > 0)
+                while (allParts.Count > 0)
                 {
-                    foreach(var item in allParts)
+                    foreach (var item in allParts)
                     {
-                        if(item.Ammount > 0)
+                        if (CheckIfRemains(item.Ammount))
                         {
-                            if(CheckByCriteria(model.OriginalParts, model.QualityParts, model.AvgPrice, avgPrice, item))
+                            if (CheckByCriteria(model.OriginalParts, model.QualityParts, model.AvgPrice, avgPrice, item))
                             {
                                 changeableParts.Add(item);
-                                AddToPartList(item);
+                                AddToPartList(item, model.ReservationID);
                                 RemovePartFromList(allParts, item);
+                                count++;
                                 break;
                             }
                             else
@@ -89,21 +102,8 @@ namespace Autoservisas.Controllers
                         }
                     }
                 }
-
-                foreach(var item in changeableParts)
-                {
-                    Debug.WriteLine(item.Name + " " + item.Code);
-                }
-
-                Debug.WriteLine(model.ReservationID);
-                Debug.WriteLine(model.OriginalParts);
-                Debug.WriteLine(model.QualityParts);
-                Debug.WriteLine(model.AvgPrice);
-
-                /*Work db = new Work();
-                db.UpdateDetails(model);
-                return RedirectToAction("Index");*/
-                return View();
+                Debug.WriteLine(count);
+                return RedirectToAction("Index", new { count = count});
             }
             catch
             {
@@ -114,6 +114,18 @@ namespace Autoservisas.Controllers
         private void RemovePartFromList(List<Part> list, Part item)
         {
             list.Remove(item);
+        }
+
+        private bool CheckIfRemains(int amount)
+        {
+            if (amount > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool CheckByCriteria(bool OriginalParts, bool QualityParts, bool AvgPrice, double avgPrice, Part item)
@@ -148,12 +160,13 @@ namespace Autoservisas.Controllers
                 passed = true;
             }
 
-                return passed;
+            return passed;
         }
 
-        private void AddToPartList(Part item)
+        private void AddToPartList(Part item, int reservationID)
         {
-
+            Part db = new Part();
+            db.AddToReservationPartList(item, reservationID);
         }
     }
 }

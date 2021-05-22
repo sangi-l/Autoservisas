@@ -73,6 +73,10 @@
         @Html.ActionLink("Automatiškai parinkti detales", "Automatisation", new { id = item.ReservationID })
     </th>
 </tr>
-}
-
+    }
 </table>
+ 
+@if (!String.IsNullOrEmpty(ViewBag.Error))
+{
+    @:<script type="text/javascript">alert('@ViewBag.Error')</script>
+}

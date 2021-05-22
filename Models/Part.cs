@@ -167,14 +167,14 @@ namespace Autoservisas.Models
             return Categories;
         }
 
-        public bool AddToReservationPartList(Part item)
+        public bool AddToReservationPartList(Part item, int reservationID)
         {
             connection();
-            SqlCommand cmd = new SqlCommand("UpdatePartDetails", con);
+            SqlCommand cmd = new SqlCommand("AddPartToReservationPartList", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@id_detale", model.PartID);
-            cmd.Parameters.AddWithValue("@likutis", model.Ammount);
+            cmd.Parameters.AddWithValue("@fk_rezervacijaid", reservationID);
+            cmd.Parameters.AddWithValue("@fk_detaleid", item.PartID);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
