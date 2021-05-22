@@ -110,5 +110,44 @@ namespace Autoservisas.Models
 
             return work;
         }
+
+        public List<Work> GetReservation(int id)
+        {
+            List<Work> reservation = new List<Work>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetReservationDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                int rid = Convert.ToInt32(dr["id_rezervacija"]);
+                if (rid == id)
+                {
+                    reservation.Add(
+                    new Work
+                    {
+                        Data = Convert.ToDateTime(dr["data"]),
+                        Make = Convert.ToString(dr["marke"]),
+                        Model = Convert.ToString(dr["modelis"]),
+                        Displacement = Convert.ToDouble(dr["turis"]),
+                        MakeDate = Convert.ToDateTime(dr["pagaminimo_metai"]),
+                        FuelType = Convert.ToString(dr["kuro_tipas"]),
+                        Plate = Convert.ToString(dr["valstybinis_nr"]),
+                        Price = Convert.ToDouble(dr["darbo_kaina"]),
+                        Sum = Convert.ToDouble(dr["suma"]),
+                        finishedDate = Convert.ToDateTime(dr["pabaigos_data"]),
+                    }); ;
+                }
+            }
+
+            return reservation;
+        }
     }
 }

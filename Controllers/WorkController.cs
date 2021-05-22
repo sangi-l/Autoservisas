@@ -16,5 +16,12 @@ namespace Autoservisas.Controllers
             int id = Auth.GetUserId();
             return View(db.GetWork(id));
         }
+
+        // GET: Work/Edit
+        public ActionResult Edit(int id)
+        {
+            Reservation db = new Reservation();
+            return View(db.GetReservation(id));
+        }
     }
 }
