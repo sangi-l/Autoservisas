@@ -159,12 +159,6 @@ namespace Autoservisas.Models
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@id_rezervacija", model.ReservationID);
-            cmd.Parameters.AddWithValue("@modelis", model.Name);
-            cmd.Parameters.AddWithValue("@marke", model.Make);
-            cmd.Parameters.AddWithValue("@pagaminimo_metai", model.MakeDate);
-            cmd.Parameters.AddWithValue("@turis", model.Displacement);
-            cmd.Parameters.AddWithValue("@kuro_tipas", model.FuelType);
-            cmd.Parameters.AddWithValue("@valstybinis_nr", model.Plate);
             cmd.Parameters.AddWithValue("@darbo_kaina", model.Price);
             cmd.Parameters.AddWithValue("@pabaigos_data", model.finishedDate);
 
