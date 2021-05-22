@@ -14,6 +14,7 @@ namespace Autoservisas.Controllers
         {
             Work db = new Work();
             int id = Auth.GetUserId();
-            return View(db);
+            return View(db.GetWork(id));
         }
     }
+}

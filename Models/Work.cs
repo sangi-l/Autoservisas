@@ -31,7 +31,7 @@ namespace Autoservisas.Models
 
         [DisplayName("Tūris")]
         [Required]
-        public string Displacement { get; set; }
+        public double Displacement { get; set; }
 
         [DisplayName("Pagaminimo Metai")]
         [Required]
@@ -48,7 +48,11 @@ namespace Autoservisas.Models
 
         [DisplayName("Darbo kaina")]
         [Required]
-        public float Price { get; set; }
+        public double Price { get; set; }
+
+        [DisplayName("Suma")]
+        [Required]
+        public double Sum { get; set; }
 
         [DisplayName("Pabaigos Data")]
         [Required]
@@ -71,7 +75,7 @@ namespace Autoservisas.Models
             List<Work> work = new List<Work>();
             connection();
 
-            SqlCommand cmd = new SqlCommand("GetWorkHours", con);
+            SqlCommand cmd = new SqlCommand("GetReservationDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -88,15 +92,23 @@ namespace Autoservisas.Models
                     work.Add(
                     new Work
                     {
-                        TimeID = Convert.ToInt32(dr["id_darbo_laikas"]),
-                        DateFrom = Convert.ToDateTime(dr["data"]),
-                        TimeFrom = Convert.ToInt32(dr["laikas_nuo"]),
-                        TimeTo = Convert.ToInt32(dr["laikas_iki"]),
+                        ReservationID = Convert.ToInt32(dr["id_rezervacija"]),
+                        Data = Convert.ToDateTime(dr["data"]),
+                        Make = Convert.ToString(dr["marke"]),
+                        Model = Convert.ToString(dr["modelis"]),
+                        Displacement = Convert.ToDouble(dr["turis"]),
+                        MakeDate = Convert.ToDateTime(dr["pagaminimo_metai"]),
+                        FuelType = Convert.ToString(dr["kuro_tipas"]),
+                        Plate = Convert.ToString(dr["valstybinis_nr"]),
+                        Price = Convert.ToDouble(dr["darbo_kaina"]),
+                        Sum = Convert.ToDouble(dr["suma"]),
+                        finishedDate = Convert.ToDateTime(dr["pabaigos_data"]),
                         MechanicID = mid
-                    });
+                    }); ;
                 }
             }
 
             return work;
         }
     }
+}
