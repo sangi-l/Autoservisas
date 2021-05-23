@@ -37,6 +37,7 @@ namespace Prototipas.Controllers
         public ActionResult Send()
         {
             SendEmail();
+            Session["cart"] = null;
             return RedirectToAction("Index");
         }
         public void SendEmail()
