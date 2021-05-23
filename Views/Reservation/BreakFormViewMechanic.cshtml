@@ -1,29 +1,36 @@
-﻿@model IEnumerable<Autoservisas.Models.Mechanic>
+﻿@model Autoservisas.Models.Reservation
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Nuotrauka
+            </td>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MechanicID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Picture)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model.mechanikai)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MechanicID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Picture)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Pasirinkti", "BreakFormViewTime", new { id = item.MechanicID })
+                    </td>*@
+                <div class="form-group">
+                    @Html.HiddenFor(model => Model.mID, new { Value = item.MechanicID })
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Išsaugoti" class="btn btn-default" />
+                    </div>
+                </div>
+            </tr>
+        }
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MechanicID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Picture)
-        </td>
-        <td>
-            @Html.ActionLink("Pasirinkti", "BreakFormViewTime", new { id = item.MechanicID })
-        </td>
-    </tr>
-    }
-
-</table>
+    </table>
+}

@@ -72,11 +72,14 @@ namespace Autoservisas.Models
 
         [DisplayName("Simptomo aprašymas")]
         [Required]
-        public string SymptomData { get; set; }
+        public IEnumerable<string> SymptomData { get; set; }
 
         [DisplayName("Meistras")]
         [Required]
         public string Mechanic { get; set; }
+        public int mID { get; set; }
+
+        public List<Mechanic> mechanikai { get; set; }
 
         private SqlConnection con;
         private void connection()
@@ -109,6 +112,32 @@ namespace Autoservisas.Models
             }
 
             return Categories;
+        }
+
+        public List<String> GetSymptoms()
+        {
+            List<String> Symptoms = new List<String>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetSymptomDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                string symptom = Convert.ToString(dr["aprasymas"]);
+                if (!Symptoms.Contains(symptom))
+                {
+                    Symptoms.Add(symptom);
+                }
+            }
+
+            return Symptoms;
         }
 
         public class Timee

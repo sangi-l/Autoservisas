@@ -17,25 +17,38 @@ namespace Prototipas.Controllers
             db.Category = db.GetCategories();
             db.Types = db.GetTypes();
             db.FuelTypes = db.GetFuelTypes();
+            db.SymptomData = db.GetSymptoms();
             return View(db);
         }
         [HttpPost]
         public ActionResult BreakFormView(Reservation model)
         {
             Reservation db = new Reservation();
-            List<Mechanic> mechList = db.GetMechanicsFromCategory(model.Categoryy);
-            return View("BreakFormViewMechanic", mechList);
+            //List<Mechanic> mechList = db.GetMechanicsFromCategory(model.Categoryy);
+            model.mechanikai = db.GetMechanicsFromCategory(model.Categoryy);
+            return RedirectToAction("BreakFormViewMechanic", model);
         }
 
-        public ActionResult BreakFormViewMechanic(List<Mechanic> mech)
+        public ActionResult BreakFormViewMechanic(Reservation model)
         {
-            return View(mech);
+            Reservation db = new Reservation();
+            model.mechanikai = db.GetMechanicsFromCategory(model.Categoryy);
+            return View(model);
         }
 
-        public ActionResult BreakFormViewTime(int id)
+        [HttpPost]
+        public ActionResult BreakFormViewMechanic(Reservation model, string kazkas = "")
+        {
+
+            return RedirectToAction("BreakFormViewTime", (model.mID, model));
+        }
+
+        public ActionResult BreakFormViewTime(int id, Reservation model)
         {
             Reservation db = new Reservation();
             List<Reservation.Timee> timeList = db.GetTime(id);
+            Debug.WriteLine(model.CarNumber);
+            Debug.WriteLine(model.mechanikai.Count());
             return View(timeList);
         }
     }
