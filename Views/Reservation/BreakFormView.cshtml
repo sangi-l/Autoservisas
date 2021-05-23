@@ -6,31 +6,31 @@
 
 @using (Html.BeginForm())
 {
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Types, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => Model.Types, new SelectList(Model.Types, "Text"), htmlAttributes: new { @class = "form-control", id = "marke" })
+                @Html.ValidationMessageFor(x => x.Types, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Types, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(x => Model.Types, new SelectList(Model.Types, "Text"), htmlAttributes: new { @class = "form-control", id = "marke" })
-            @Html.ValidationMessageFor(x => x.Types, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -38,7 +38,7 @@
         @Html.LabelFor(model => model.FuelTypes, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(x => Model.FuelTypes, new SelectList(Model.FuelTypes, "Text"), htmlAttributes: new { @class = "form-control", id = "marke" })
-            @Html.ValidationMessageFor(x => x.Types, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(x => x.FuelTypes, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -77,15 +77,18 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Categoryy, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => Model.Categoryy, new SelectList(Model.Category), htmlAttributes: new { @class = "form-control", id = "marke" })
+            @Html.DropDownListFor(model => model.Categoryy, new SelectList(Model.Category), htmlAttributes: new { @class = "form-control", id = "marke" })
             @Html.ValidationMessageFor(model => model.Categoryy, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-10">
-            @Html.ActionLink("Tęsti", "BreakFormViewMechanic", new { Categoryy = Model.Categoryy}, new { @class = "btn btn-primary btn-large" })
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Išsaugoti" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

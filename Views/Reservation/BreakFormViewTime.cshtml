@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Autoservisas.Models.Reservation.Timee>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timefrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timeto)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timefrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timeto)
+            </td>
+            <td>
+                @Html.ActionLink("Baigti", "BreakFormView", new { id = item.timeid })
+            </td>
+        </tr>
+    }
+
+</table>

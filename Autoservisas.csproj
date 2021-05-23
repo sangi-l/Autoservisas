@@ -196,6 +196,7 @@
     <Content Include="Views\Work\Edit.cshtml" />
     <Content Include="Views\Work\Automatisation.cshtml" />
     <Content Include="Views\Reservation\BreakFormViewMechanic.cshtml" />
+    <Content Include="Views\Reservation\BreakFormViewTime.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -19,7 +19,7 @@ namespace Autoservisas.Models
 
         [DisplayName("Modelis")]
         [Required]
-        public string Model { get; set; }
+        public string Name { get; set; }
 
         [DisplayName("Pagaminimo metai")]
         [Required]
@@ -109,6 +109,48 @@ namespace Autoservisas.Models
             }
 
             return Categories;
+        }
+
+        public class Timee
+        {
+            [DisplayName("Laikas nuo")]
+            public int timefrom { get; set; }
+            [DisplayName("Laikas iki")]
+            public int timeto { get; set; }
+            [DisplayName("Data")]
+            public DateTime date { get; set; }
+            public int timeid { get; set; }
+
+        }
+        public List<Timee> GetTime(int id)
+        {
+            List<Timee> Time = new List<Timee>();
+            connection();
+
+            SqlCommand cmd = new SqlCommand("GetWorkHours", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            con.Open();
+            sd.Fill(dt);
+            con.Close();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                int mid = Convert.ToInt32(dr["fk_meistrasid"]);
+                if (mid == id)
+                {
+                    Time.Add(new Timee { 
+                        timefrom = Convert.ToInt32(dr["laikas_nuo"]),
+                        timeto = Convert.ToInt32(dr["laikas_iki"]),
+                        date = Convert.ToDateTime(dr["data"]),
+                        timeid = Convert.ToInt32(dr["id_darbo_laikas"])
+                    });
+                }
+            }
+
+            return Time;
         }
 
         public List<String> GetTypes()

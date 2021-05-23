@@ -19,18 +19,24 @@ namespace Prototipas.Controllers
             db.FuelTypes = db.GetFuelTypes();
             return View(db);
         }
-
-        public ActionResult BreakFormView(Reservation category)
-        {
-            return View("BreakFormViewMechanic", category.Categoryy);
-        }
-
-        public ActionResult BreakFormViewMechanic(Reservation MV)
+        [HttpPost]
+        public ActionResult BreakFormView(Reservation model)
         {
             Reservation db = new Reservation();
-            string selectedvalue = MV.Categoryy;
-            Debug.WriteLine(selectedvalue);
-            return View("BreakFormViewMechanic", db.GetMechanicsFromCategory(selectedvalue));
+            List<Mechanic> mechList = db.GetMechanicsFromCategory(model.Categoryy);
+            return View("BreakFormViewMechanic", mechList);
+        }
+
+        public ActionResult BreakFormViewMechanic(List<Mechanic> mech)
+        {
+            return View(mech);
+        }
+
+        public ActionResult BreakFormViewTime(int id)
+        {
+            Reservation db = new Reservation();
+            List<Reservation.Timee> timeList = db.GetTime(id);
+            return View(timeList);
         }
     }
 }
