@@ -24,17 +24,17 @@
                 <ul class="nav navbar-nav navbar-left">
                     @if (Auth.GetRole() == (int)Auth.Roles.User)
                     {
-                        <li>@Html.ActionLink("Simptomai", "Index", "Symptom")</li>
-                        <li>@Html.ActionLink("Detalės", "Index", "Part")</li>
-                        <li>@Html.ActionLink("Rankinis Detalių parinkimas", "ManualChooseIndex", "Part")</li>
-                        <li>@Html.ActionLink("Pirkinių krepšelis", "Index", "Cart")</li>
                         <li>@Html.ActionLink("Pildyti gedimo formą", "BreakFormView", "Reservation")</li>
+                        <li>@Html.ActionLink("Pirkinių krepšelis", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("Rankinis Detalių parinkimas", "ManualChooseIndex", "Part")</li>
                     }
                     @if (Auth.GetRole() == (int)Auth.Roles.Mechanic)
                     {
+                        <li>@Html.ActionLink("Pirkinių krepšelis", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("Rankinis Detalių parinkimas", "ManualChooseIndex", "Part")</li>
+                        <li>@Html.ActionLink("Simptomai", "Index", "Symptom")</li>
                         <li>@Html.ActionLink("Pasirinkti darbo valandas", "Index", "WorkHours")</li>
                         <li>@Html.ActionLink("Peržiūrėti dienos darbus", "Index", "Work")</li>
-                        <li>@Html.ActionLink("Pirkinių krepšelis", "Index", "Cart")</li>
                     }
                     @if (Auth.GetRole() == (int)Auth.Roles.Administrator)
                     {
